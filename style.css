@@ -1,3 +1,57 @@
+/* =========================================
+   STYLE PERSONNALISÉ POUR LILLIAN (LACHIZE)
+   ========================================= */
+
+/* 1. Animation des couleurs RGB + Lumière Néon */
+@keyframes rgb-glow-lillian {
+    0%   { border-color: #ff0000; box-shadow: 0 0 15px #ff0000; } /* Rouge */
+    17%  { border-color: #ffff00; box-shadow: 0 0 15px #ffff00; } /* Jaune */
+    33%  { border-color: #00ff00; box-shadow: 0 0 15px #00ff00; } /* Vert */
+    50%  { border-color: #00ffff; box-shadow: 0 0 15px #00ffff; } /* Cyan */
+    67%  { border-color: #0000ff; box-shadow: 0 0 15px #0000ff; } /* Bleu */
+    83%  { border-color: #ff00ff; box-shadow: 0 0 15px #ff00ff; } /* Magenta */
+    100% { border-color: #ff0000; box-shadow: 0 0 15px #ff0000; } /* Retour Rouge */
+}
+
+/* 2. Animation de Lévitation (Flottement haut/bas) */
+@keyframes float-lillian {
+    0%   { transform: translateY(0px); }
+    50%  { transform: translateY(-12px); } /* Monte de 12px */
+    100% { transform: translateY(0px); }   /* Redescend */
+}
+
+/* 3. Configuration du cadre */
+#LACHIZE {
+    /* Bordure épaisse pour bien voir le RGB */
+    border-width: 4px !important;
+    border-style: solid !important;
+    background-color: white; /* Propre sur le fond */
+
+    /* Lancement des 2 animations en même temps :
+       - rgb-glow-lillian : dure 3s, linéaire, infini
+       - float-lillian : dure 4s, fluide, infini */
+    animation: 
+        rgb-glow-lillian 3s linear infinite, 
+        float-lillian 4s ease-in-out infinite;
+
+    /* Transition douce pour l'effet de zoom */
+    transition: transform 0.3s ease;
+}
+
+/* 4. Comportement au survol de la souris */
+#LACHIZE:hover {
+    /* On garde le RGB (running) mais on PAUSE la lévitation (paused) */
+    animation-play-state: running, paused;
+
+    /* On applique le ZOOM et on le maintient un peu en hauteur */
+    transform: scale(1.1) translateY(-12px);
+    
+    /* On s'assure que le cadre passe devant les autres */
+    z-index: 50; 
+    cursor: pointer;
+}
+
+/* --- FIN DU STYLE POUR LILLIAN --- */
 #JULLIAND{
     background-color: rgba(175, 155, 155, 0.542);
     text-align: center;
