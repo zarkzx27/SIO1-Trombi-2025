@@ -1,0 +1,737 @@
+
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CV</title>
+<style>
+    body {
+        margin: 0;
+        font-family: 'Orbitron', sans-serif;
+        background: radial-gradient(circle, #0d0d0d, #1a1a1a);
+        color: #fff;
+        overflow-x: hidden;
+        position: relative;
+        cursor: url('https://cur.cursors-4u.net/cursors/cur-11/cur1048.cur'), auto;
+    }
+    /* Neon animated background */
+    @keyframes neonPulse {
+        0% {background: radial-gradient(circle, #ff00ff, #0d0d0d);}
+        50% {background: radial-gradient(circle, #00ffff, #0d0d0d);}
+        100% {background: radial-gradient(circle, #ff00ff, #0d0d0d);}
+    }
+    body {animation: neonPulse 10s infinite alternate;}
+
+    /* Glitch effect */
+    header {
+        text-align: center;
+        padding: 50px 20px;
+        font-size: 3em;
+        font-weight: bold;
+        color: #ff00ff;
+        text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff;
+        animation: glitch 1s infinite;
+    }
+    @keyframes glitch {
+        0% {text-shadow: 2px 0 red, -2px 0 blue;}
+        20% {text-shadow: -2px 0 lime, 2px 0 magenta;}
+        40% {text-shadow: 2px 0 cyan, -2px 0 yellow;}
+        60% {text-shadow: -2px 0 pink, 2px 0 purple;}
+        80% {text-shadow: 2px 0 orange, -2px 0 green;}
+        100% {text-shadow: -2px 0 red, 2px 0 blue;}
+    }
+
+    .content {
+        max-width: 900px;
+        margin: 30px auto;
+        background: rgba(255,0,255,0.1);
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 0 20px #ff00ff, 0 0 40px #00ffff;
+        font-size: 1.2em;
+        line-height: 1.6em;
+        animation: fadeIn 2s ease-in;
+        transform-style: preserve-3d;
+    }
+    @keyframes fadeIn {
+        from {opacity: 0; transform: translateY(50px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+    .content:hover {
+        transform: rotateY(10deg) rotateX(5deg) scale(1.05);
+        box-shadow: 0 0 50px #ff00ff, 0 0 80px #00ffff;
+    }
+
+    /* Controls */
+    .controls {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        z-index: 1000;
+    }
+    .btn {
+        background: #ff00ff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-weight: bold;
+        box-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff;
+        transition: background 0.3s, color 0.3s;
+    }
+    .btn:hover {
+        background: #00ffff;
+        color: #000;
+    }
+
+    footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 1em;
+        opacity: 0.8;
+        color: #ff00ff;
+        text-shadow: 0 0 10px #ff00ff;
+    }
+
+    .dark-mode {background: #000; color: #ff00ff;}
+
+    #matrix {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: black;
+        color: #0f0;
+        font-family: monospace;
+        font-size: 14px;
+        white-space: pre;
+        display: none;
+        z-index: 9998;
+    }
+</style>
+<style>
+body { margin: 0; font-family: 'Courier New', monospace; background: #000; color: #0f0; }
+.intro-screen {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: #000; display: flex; flex-direction: column; justify-content: center; align-items: center;
+  font-size: 1.5rem; z-index: 9999;
+}
+.intro-screen button {
+  margin: 10px; padding: 10px 20px; font-size: 1.2rem; background: #0f0; color: #000; border: none; cursor: pointer;
+}
+.intro-screen button:hover { background: #fff; color: #000; }
+.cv-content { display: none; padding: 20px; }
+.message { color: #f00; font-size: 1.5rem; margin-top: 20px; }
+</style><style>
+body {
+  cursor: none;
+}
+.glitch-cursor {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  background: #00fff7;
+  border-radius: 50%;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  box-shadow: 0 0 10px #00fff7, 0 0 20px #ff00ff;
+  animation: glitch 0.3s infinite;
+  transform: translate(-50%, -50%);
+}
+@keyframes glitch {
+  0% { filter: hue-rotate(0deg); }
+  50% { filter: hue-rotate(90deg); }
+  100% { filter: hue-rotate(0deg); }
+}
+</style><style>
+.matrix-mode {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  color: #0f0;
+  font-family: 'Courier New', monospace;
+  overflow: hidden;
+  z-index: 9998;
+}
+.matrix-rain {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9997;
+}
+canvas#matrixCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+</style><style>
+.glitch-cursor {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  background: #00fff7;
+  border-radius: 50%;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  box-shadow: 0 0 10px #00fff7, 0 0 20px #ff00ff;
+  animation: glitch 0.3s infinite;
+  transform: translate(-50%, -50%);
+  z-index: 10000; /* Ensure cursor is above intro and matrix layers */
+}
+@keyframes glitch {
+  0% { filter: hue-rotate(0deg); }
+  50% { filter: hue-rotate(90deg); }
+  100% { filter: hue-rotate(0deg); }
+}
+body { cursor: none; }
+</style><style>
+#matrixCanvas { display: none; }
+.matrix-btn {
+  
+  
+  
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  background: #0f0;
+  color: #000;
+  border: none;
+  cursor: pointer;
+  z-index: 10001;
+}
+.matrix-btn:hover { background: #fff; color: #000; }
+
+.matrix-btn-fixed {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  background: #0f0;
+  color: #000;
+  border: none;
+  cursor: pointer;
+  z-index: 10001;
+}
+.matrix-btn-fixed:hover { background: #fff; color: #000; }
+</style></head>
+<body><canvas class="matrix-rain" id="matrixCanvas"></canvas><div class="intro-screen"><p>Bienvenue, voulez-vous entrer dans la Matrix ?</p><button id="btnYes">Oui</button><button id="btnNo">Non</button><div class="message" id="message"></div></div><div class="cv-content">
+<div id="matrix"></div>
+<div class="controls">
+<button class="btn" onclick="toggleDarkMode()">🌙 Mode Sombre</button>
+<button class="btn" onclick="changeTheme()">🌈 Changer Thème</button>
+<button class="btn" onclick="toggleMusic()">🎵 Musique Synthwave</button>
+<button class="btn" onclick="playSound()">🔊 Effet Sonore</button>
+</div>
+<header>⚡ Curriculum vitæ 🤖</header>
+<div class="content">
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<title>cv-Nael</title>
+<!-- Font -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&amp;display=swap" rel="stylesheet"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<style>
+    /* ===== CYBERPUNK OVERDRIVE (TOUT DANS LE HEAD) ===== */
+    :root{
+      --bg1: #050009;
+      --neon-cyan: #00ffe1;
+      --neon-mag: #ff00d1;
+      --neon-pink: #ff2d9c;
+      --glass: rgba(255,255,255,0.03);
+      --text: #dfecff;
+      --muted: rgba(223,236,255,0.5);
+    }
+    /* base */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: "Orbitron", sans-serif;
+      background:
+        radial-gradient(1200px 600px at 10% 10%, rgba(70,0,120,0.35), transparent 10%),
+        radial-gradient(1000px 600px at 90% 80%, rgba(0,30,60,0.30), transparent 10%),
+        linear-gradient(180deg, var(--bg1) 0%, #000 100%);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      overflow-y:auto;
+    }
+
+    /* scanlines overlay */
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(255,255,255,0.02) 0px,
+        rgba(255,255,255,0.02) 2px,
+        transparent 3px
+      );
+      pointer-events:none;
+      mix-blend-mode: overlay;
+      animation: scan 6s linear infinite;
+      z-index:4;
+    }
+    @keyframes scan{0%{transform:translateY(-20%)}100%{transform:translateY(20%)}}
+
+    /* page container */
+    .wrap{
+      max-width:920px;
+      margin:28px auto;
+      padding:28px;
+      position:relative;
+      z-index:6;
+    }
+
+    /* header card */
+    .card{
+      display:grid;
+      grid-template-columns: 1fr 320px;
+      gap:20px;
+      align-items:start;
+    }
+
+    .left {
+      padding:26px;
+      border-radius:14px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid rgba(0,255,225,0.06);
+      box-shadow: 0 6px 30px rgba(0,0,0,0.6), 0 0 30px rgba(0,255,225,0.02);
+      position:relative;
+      overflow:hidden;
+      backdrop-filter: blur(6px);
+    }
+
+    .right {
+      padding:20px;
+      border-radius:12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+      border:1px solid rgba(255,0,220,0.05);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+      min-height:220px;
+    }
+
+    /* Neon name + glitch */
+    h1.name {
+      font-size:clamp(28px,5vw,42px);
+      margin:6px 0;
+      letter-spacing:1px;
+      position:relative;
+      color:var(--neon-cyan);
+      text-transform:uppercase;
+      text-shadow:
+        0 0 6px var(--neon-cyan),
+        0 0 22px var(--neon-mag),
+        0 0 40px rgba(255,0,200,0.08);
+      display:inline-block;
+    }
+
+    /* hardcore glitch */
+    .glitch{
+      position:relative;
+      display:inline-block;
+      --t: 0.9s;
+      animation: flicker 6s infinite;
+    }
+    .glitch::before, .glitch::after{
+      content: attr(data-text);
+      position:absolute;
+      left:0; top:0;
+      pointer-events:none;
+      mix-blend-mode: screen;
+      opacity:0.9;
+    }
+    .glitch::before{
+      color:var(--neon-mag);
+      transform: translate(-2px, -2px);
+      clip-path: inset(0 0 55% 0);
+      animation: glitch-1 calc(var(--t) * 1.5) infinite linear;
+    }
+    .glitch::after{
+      color:var(--neon-pink);
+      transform: translate(2px, 2px);
+      clip-path: inset(45% 0 0 0);
+      animation: glitch-2 calc(var(--t) * 1.2) infinite linear;
+    }
+    @keyframes glitch-1{
+      0%{transform:translate(-2px,-2px)}20%{transform:translate(-8px,4px)}40%{transform:translate(6px,-3px)}60%{transform:translate(-3px,2px)}80%{transform:translate(2px,-2px)}100%{transform:translate(0,0)}
+    }
+    @keyframes glitch-2{
+      0%{transform:translate(2px,2px)}25%{transform:translate(6px,-4px)}50%{transform:translate(-5px,3px)}75%{transform:translate(4px,-1px)}100%{transform:translate(0,0)}
+    }
+
+    /* intro paragraph */
+    p.intro{
+      margin:10px 0 0;
+      color:var(--muted);
+      font-size:1rem;
+      line-height:1.3;
+    }
+
+    /* contact list */
+    .contact{ display:flex; flex-direction:column; gap:8px; font-size:0.95rem; color:var(--muted); }
+    .contact .item{ display:flex; gap:8px; align-items:center; }
+    .pill{ display:inline-block; padding:6px 10px; border-radius:8px; background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(0,0,0,0.03)); border:1px solid rgba(0,255,200,0.06); color:var(--text); font-weight:700; }
+
+    /* sections */
+    main{ margin-top:22px; display:grid; grid-template-columns:1fr 320px; gap:24px; align-items:start; }
+    section.box{
+      padding:18px;
+      border-radius:12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+      border:1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+      backdrop-filter: blur(6px);
+      animation: slideUp .9s ease forwards;
+      opacity:0; transform: translateY(10px);
+    }
+    @keyframes slideUp{ to{opacity:1; transform:none} }
+
+    .section-title{
+      display:flex; align-items:center; gap:10px;
+      margin-bottom:12px;
+    }
+    .section-title h2{
+      font-size:0.92rem; letter-spacing:1px; text-transform:uppercase;
+      margin:0; color:var(--neon-cyan);
+      text-shadow: 0 0 6px rgba(0,255,220,0.08);
+    }
+    .list { margin:0; padding:0; list-style:none; color:var(--muted); }
+    .list li { padding:6px 0; border-bottom:1px dashed rgba(255,255,255,0.02); }
+
+    /* timeline / jobs */
+    .job { margin-bottom:12px; }
+    .job .title { color:var(--text); font-weight:700; }
+    .job .meta { color:var(--muted); font-size:0.88rem; margin-bottom:6px; }
+
+    /* skill badges */
+    .skills { display:flex; gap:8px; flex-wrap:wrap; }
+    .skill { font-size:0.8rem; padding:8px 10px; border-radius:999px; background:linear-gradient(90deg, rgba(0,255,220,0.06), rgba(255,0,220,0.03)); border:1px solid rgba(0,255,220,0.06); color:var(--text); }
+
+    /* right column small cards */
+    .small { padding:12px; border-radius:10px; margin-bottom:14px; background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005)); border:1px solid rgba(255,255,255,0.02); color:var(--muted); }
+
+    /* neon footer */
+    footer{ margin-top:24px; text-align:center; color:var(--muted); font-size:0.85rem; opacity:0.9; }
+
+    /* interactive hover */
+    a.neonlink{
+      position:relative;
+      color:var(--neon-cyan); text-decoration:none; font-weight:700;
+      transition: all .25s ease;
+    }
+    a.neonlink:hover{ transform:translateY(-4px) scale(1.02); text-shadow: 0 0 10px var(--neon-mag); color:var(--neon-pink) }
+
+    /* responsive */
+    @media (max-width:900px){
+      .card, main{ grid-template-columns: 1fr }
+      .right { order:2 }
+    }
+
+    /* particle canvas sits behind content */
+    #particles { position:fixed; inset:0; z-index:2; pointer-events:none; opacity:0.65; mix-blend-mode:screen; }
+    /* tiny flicker + minor HOVER anim */
+    .pulse { animation: pulse 2.2s ease-in-out infinite alternate; }
+    @keyframes pulse{ from{ transform:scale(1)} to{ transform:scale(1.02)} }
+
+    /* subtle flicker global to feel "alive" */
+    @keyframes flicker {
+      0%{opacity:1} 3%{opacity:.85} 6%{opacity:1} 7%{opacity:.9} 10%{opacity:1} 100%{opacity:1}
+    }
+    .flicker { animation: flicker 4s infinite; }
+  </style>
+</head>
+<body>
+<!-- particle canvas -->
+<canvas id="particles"></canvas>
+<div class="wrap" role="main">
+<!-- Header -->
+<div class="card">
+<div class="left">
+<div class="topline">
+<div style="display:flex; align-items:center; gap:12px;">
+<div class="pill">Étudiant</div>
+<div style="color:var(--muted); font-size:0.9rem;">BTS Services aux Organisations</div>
+</div>
+</div>
+<!-- NAME + GLITCH -->
+<h1 class="name">
+<span class="glitch" data-text="NAËL BRAHIM">NAËL BRAHIM</span>
+</h1>
+<!-- intro (user-provided) -->
+<p class="intro">Je suis à la recherche de stage dans le domaine du réseau du 25 Mai au 26 Juin 2026.</p>
+<!-- quick highlights -->
+<div style="margin-top:18px; display:flex; gap:10px; flex-wrap:wrap;">
+<div class="skill">Communication</div>
+<div class="skill">Résolution de problèmes</div>
+<div class="skill">Travail d'equipes</div>
+<div class="skill">Polyvalent</div>
+</div>
+<!-- main left content will be injected below -->
+</div>
+<aside class="right">
+<div class="small contact">
+<div style="font-weight:700; color:var(--text); margin-bottom:6px;">Contact</div>
+<div class="item"><strong>Téléphone:</strong> <span style="color:var(--muted)">06 42 90 40 99</span></div>
+<div class="item"><strong>Adresse:</strong> <span style="color:var(--muted)">Villeurbanne 69100</span></div>
+<div class="item"><strong>Email:</strong> <a class="neonlink" href="#">(ajoute ton email)</a></div>
+<div style="height:10px"></div>
+<div style="font-weight:700; color:var(--text); margin-bottom:6px;">Formation</div>
+<div style="color:var(--muted); font-size:0.95rem;">
+            BTS Services aux Organisations — Business School by CSND 2025-2027<br/>
+            Licence 1 Économie-Droit-Gestion — Université Lumières Lyon 2 (2022-2024)<br/>
+            Baccalauréat général option Économie-Anglais (2021)
+          </div>
+</div>
+</aside>
+</div>
+<!-- Main sections -->
+<main>
+<section class="box" style="grid-column:1/span1;">
+<div class="section-title">
+<h2>Expériences professionelles</h2>
+</div>
+<!-- Keeping the job content from your file (dates + tasks preserved) -->
+<div class="job">
+<div class="title">Carrefour Market — Juillet 2021</div>
+<div class="meta">Villeurbanne Grandclément</div>
+<ul class="list">
+<li>Mise en rayon de produits</li>
+<li>Facing</li>
+<li>Déballage et recyclage de cartons au compacteur</li>
+<li>Entretien / Nettoyage du magasin</li>
+</ul>
+</div>
+<div class="job">
+<div class="title">Casino - Juillet/Aout 2022</div>
+<div class="meta">Villeurbanne Perralière</div>
+<ul class="list">
+<li>Mise en rayon de produits</li>
+<li>Facing</li>
+<li>Déballage et recyclage de cartons au compacteur</li>
+<li>Entretien / Nettoyage du magasin</li>
+</ul>
+</div>
+<div class="job">
+<div class="title">Rif Solutions Informatiques - 2023</div>
+<div class="meta">Villeurbanne Gratte-ciel</div>
+<ul class="list">
+<li>Gravure de disques</li>
+<li>Démontage et réparation d'ordinateurs</li>
+<li>Installation système d'exploitation et logiciels informatiques</li>
+<li>Entretien du matériel informatique</li>
+</ul>
+</div>
+<!-- You can add more jobs here if necessary -->
+ </section>
+<section class="box" style="grid-column:1/span1;">
+<div class="section-title"><h2>Compétences</h2></div>
+<ul class="list">
+<li>Installation et configuration de serveurs</li>
+<li>Virtualisation (Vmware,VirtualBox,HyperV)</li>
+<li>Notions de base en programmation C</li>
+<li>Administration systèmes et réseaux</li>
+<li>Notions en environnement linux</li>
+</ul>
+</section>
+</section>
+<section class="box" style="grid-column:1/span1;">
+<div class="section-title"><h2>Langues</h2></div>
+<ul class="list">
+<li>Anglais : B2</li>
+<li>Espagnol : B1</li>
+</ul>
+</section>
+</section>
+<section class="box" style="grid-column:1/span1;">
+<div class="section-title"><h2>Centres d'intérêt</h2></div>
+<ul class="list">
+<li>Pratique d’arts martiaux (Aïkido)</li>
+<li>Sport — Football</li>
+</ul>
+</section>
+</main>
+<footer>
+      WOWWW ça mérite vraiment un 20/20 selon moi c'est du jamais vu
+    </footer>
+</div>
+<!-- small JS: particles + minor interactive bits -->
+<script>
+    /* PARTICLES CANVAS (lightweight) */
+    (function(){
+      const canvas = document.getElementById('particles');
+      const ctx = canvas.getContext('2d');
+      let w = canvas.width = innerWidth;
+      let h = canvas.height = innerHeight;
+      const particles = [];
+      const N = Math.floor((w*h)/75000);
+
+      function rand(min,max){ return Math.random()*(max-min)+min; }
+      class P {
+        constructor(){
+          this.x = rand(0,w);
+          this.y = rand(0,h);
+          this.vx = rand(-0.2,0.2);
+          this.vy = rand(-0.2,0.2);
+          this.r = rand(0.6,2.2);
+          this.life = rand(80,260);
+          this.color = Math.random() > 0.6 ? 'rgba(0,255,220,0.07)' : 'rgba(255,0,220,0.04)';
+        }
+        step(){
+          this.x += this.vx;
+          this.y += this.vy;
+          this.life--;
+          if(this.x < -10) this.x = w+10;
+          if(this.x > w+10) this.x = -10;
+          if(this.y < -10) this.y = h+10;
+          if(this.y > h+10) this.y = -10;
+          if(this.life < 0){ this.x = rand(0,w); this.y = rand(0,h); this.life = rand(80,260); }
+        }
+        draw(){
+          ctx.beginPath();
+          ctx.fillStyle = this.color;
+          ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+          ctx.fill();
+        }
+      }
+
+      function init(){
+        particles.length = 0;
+        for(let i=0;i<N;i++) particles.push(new P());
+      }
+      function resize(){ w = canvas.width = innerWidth; h = canvas.height = innerHeight; init(); }
+      addEventListener('resize', resize);
+      init();
+
+      function loop(){
+        ctx.clearRect(0,0,w,h);
+        for(let p of particles){ p.step(); p.draw(); }
+        requestAnimationFrame(loop);
+      }
+      loop();
+    })();
+
+    /* small UX: show email placeholder behaviour */
+    document.querySelectorAll('a.neonlink').forEach(a=>{
+      a.addEventListener('click', e=>{
+        e.preventDefault();
+        const mail = prompt("Ajoute ton email (sera affiché dans le CV) :", "");
+        if(mail){
+          a.textContent = mail;
+          a.href = "mailto:" + mail;
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+</div>
+<footer>© 2025 Nael - Cyberpunk Edition ⚡</footer>
+<audio id="bg-music" loop="">
+<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg"/>
+</audio>
+<audio id="fx-sound">
+<source src="https://www.soundjay.com/button/beep-07.wav" type="audio/wav"/>
+</audio>
+<script>
+    function toggleDarkMode() {document.body.classList.toggle('dark-mode');}
+    let themes = ['#0d0d0d', '#1a1a40', '#002b36'];
+    let currentTheme = 0;
+    function changeTheme() {currentTheme = (currentTheme + 1) % themes.length; document.body.style.background = themes[currentTheme];}
+    function toggleMusic() {const music = document.getElementById('bg-music'); if(music.paused) music.play(); else music.pause();}
+    function playSound() {document.getElementById('fx-sound').play();}
+    function toggleMatrix() {const matrix = document.getElementById('matrix'); if(matrix.style.display==='none') {matrix.style.display='block'; startMatrix();} else {matrix.style.display='none';}}
+    function startMatrix() {const matrix = document.getElementById('matrix'); let chars='01'; let columns=Math.floor(window.innerWidth/14); let drops=Array(columns).fill(0); function draw() {let output=''; for(let i=0;i<drops.length;i++){output+=chars[Math.floor(Math.random()*chars.length)]; if(Math.random()>0.975)drops[i]=0; drops[i]++;} matrix.textContent=output.repeat(Math.floor(window.innerHeight/14));} setInterval(draw,50);}
+</script>
+</div><button class="matrix-btn" id="matrixBtn">Mode Matrix</button><script>
+const intro = document.querySelector('.intro-screen');
+const cvContent = document.querySelector('.cv-content');
+const message = document.getElementById('message');
+
+document.getElementById('btnYes').addEventListener('click', () => {
+  intro.style.display = 'none';
+  cvContent.style.display = 'block';
+});
+
+document.getElementById('btnNo').addEventListener('click', () => {
+  message.textContent = 'Impossible de consulter le CV';
+});
+</script><div class="glitch-cursor"></div><script>
+const cursor = document.querySelector('.glitch-cursor');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = `${e.clientX}px`;
+  cursor.style.top = `${e.clientY}px`;
+});
+</script><script>
+document.addEventListener('DOMContentLoaded', () => {
+  const canvas = document.getElementById('matrixCanvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const letters = 'アァイィウヴエェオカガキギクグケゲコゴサザシジスズセゼソゾタダチヂッツヅテデトドナニヌネノハバパヒビピフブプヘベペホボポマミムメモヤユヨラリルレロワヲンABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  const fontSize = 14;
+  const columns = canvas.width / fontSize;
+  const drops = Array(Math.floor(columns)).fill(1);
+  let matrixInterval;
+  let isActive = false;
+
+  function drawMatrix() {
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#0F0';
+    ctx.font = fontSize + 'px monospace';
+    for (let i = 0; i < drops.length; i++) {
+      const text = letters.charAt(Math.floor(Math.random() * letters.length));
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+      drops[i]++;
+    }
+  }
+
+  const matrixBtnFixed = document.getElementById('matrixBtnFixed');
+  matrixBtnFixed.addEventListener('click', () => {
+    if (!isActive) {
+      canvas.style.display = 'block';
+      matrixInterval = setInterval(drawMatrix, 50);
+      isActive = true;
+      matrixBtnFixed.textContent = 'Désactiver Matrix';
+    } else {
+      clearInterval(matrixInterval);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      canvas.style.display = 'none';
+      isActive = false;
+      matrixBtnFixed.textContent = 'Mode Matrix';
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+});
+</script><script>
+const cursor = document.querySelector('.glitch-cursor');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = `${e.clientX}px`;
+  cursor.style.top = `${e.clientY}px`;
+});
+</script><button class="matrix-btn-fixed" id="matrixBtnFixed">Mode Matrix</button></body>
+</html>
