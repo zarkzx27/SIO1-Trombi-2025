@@ -734,51 +734,84 @@
     font-size: 1.2em;
     margin-left: 6px;
 }
-
-/* ---- STYLE DE LA CARTE ÉTUDIANT (VIOLET) ---- */
+/* ---- STYLE SUPER-HÉROS ROUGE ---- */
 #ABOU_EL_KHAIR {
-    background: linear-gradient(135deg, #6a0dad, #b067ff); /* Violet moderne */
+    background: radial-gradient(circle at top, #ff1a1a 0%, #c40000 55%, #4d0000 100%);
     border: none;
-    border-radius: 20px;
+    border-radius: 22px;
 
-    padding: 20px;
+    padding: 22px;
     margin: 20px;
 
-    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.6),
+    0 0 55px rgba(150, 0, 0, 0.5);
+    position: relative;
+
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Effet hover sur la carte */
+/* Effet "power up" au survol */
 #ABOU_EL_KHAIR:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 18px rgba(0,0,0,0.25);
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 0 40px rgba(255, 40, 40, 0.9),
+    0 0 90px rgba(255, 230, 0, 0.7);
 }
 
-/* Image dans la carte */
+/* Bordure énergétique rouge → jaune (style Flash/Iron Man) */
+#ABOU_EL_KHAIR::before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border-radius: 25px;
+    background: linear-gradient(120deg, #ff0000, #ffe600, #ff0000);
+    z-index: -1;
+    filter: blur(10px);
+    animation: heroPulse 3s infinite linear;
+}
+
+@keyframes heroPulse {
+    0% { opacity: 0.45; }
+    50% { opacity: 1; }
+    100% { opacity: 0.45; }
+}
+
+/* PHOTO : style héroïque avec cadre jaune */
 #ABOU_EL_KHAIR img {
     width: 100%;
     height: 260px;
     object-fit: cover;
     border-radius: 15px;
 
-    border: 3px solid white;
+    border: 4px solid #ffe600; /* jaune héros */
     margin-bottom: 10px;
 
-    transition: transform 0.5s ease-in-out;
+    box-shadow: 0 0 25px rgba(255, 230, 0, 0.4);
+
+    transition: transform 0.6s ease-in-out, box-shadow 0.3s ease;
 }
 
-/* Rotation de la photo au survol */
+/* Rotation héroïque + glow jaune/rouge */
 #ABOU_EL_KHAIR:hover img {
-    transform: rotate(360deg);
+    transform: rotate(360deg) scale(1.12);
+    box-shadow:
+            0 0 45px rgba(255, 230, 0, 0.9),
+            0 0 75px rgba(255, 0, 0, 0.8);
 }
 
-/* Nom sous la photo */
+/* Nom style "super héros" */
 #ABOU_EL_KHAIR p {
-    color: white;
+    color: #ffe600;
     text-align: center;
-    font-size: 1.1rem;
-    font-weight: bold;
-    text-shadow: 0 2px 3px rgba(0,0,0,0.25);
+    font-size: 1.25rem;
+    font-weight: 900;
+    letter-spacing: 1.3px;
+    text-shadow:
+            0 0 10px rgba(255, 0, 0, 0.9),
+            0 0 14px rgba(255, 230, 0, 0.9);
+    font-family: 'Impact', 'Arial Black', sans-serif;
 }
 
 #BEROUD {
@@ -1061,4 +1094,131 @@
     100% {
         background-position: 0% 50%;
     }
+}
+
+
+
+#MOENG {
+    background: linear-gradient(135deg, rgba(255, 87, 34, 0.3), rgba(255, 152, 0, 0.3), rgba(255, 193, 7, 0.3));
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 8px 32px rgba(255, 87, 34, 0.2), inset 0 0 20px rgba(255, 255, 255, 0.1);
+    transition: all 0.4s ease;
+    display: inline-block;
+    text-align: center;
+}
+
+#MOENG:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(255, 152, 0, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.2);
+    background: linear-gradient(135deg, rgba(255, 87, 34, 0.5), rgba(255, 152, 0, 0.5), rgba(255, 193, 7, 0.5));
+}
+
+#MOENG img {
+    width: 200px;
+    height: 200px;
+    border-radius: 15px;
+    border: 3px solid rgba(255, 255, 255, 0.4);
+    transition: transform 0.6s ease;
+}
+
+#MOENG:hover img {
+    transform: scale(1.1) rotate(5deg);
+}
+
+#MOENG p {
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+    text-shadow: 0 2px 8px rgba(255, 87, 34, 0.6);
+}
+
+
+    /* STYLE PRINCIPAL POUR TOUTES LES IMAGES */
+#FAUJANET_MARTINS img {
+    display: block;
+    max-width: 100%;
+    border-radius: 14px;
+    cursor: pointer;
+
+    /* Bordure arc-en-ciel animée */
+    border: 6px solid;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(
+            45deg,
+            #ff00ff,
+            #00ffff,
+            #ffff00,
+            #ff6600,
+            #00ff00,
+            #ff00ff
+    );
+
+    /* Animations permanentes */
+    animation:
+            fadeIn 1s ease both,
+            neonBorder 6s linear infinite,
+            pulse 3s ease-in-out infinite,
+            floating 4s ease-in-out infinite;
+
+    transform-style: preserve-3d;
+    transition:
+            transform 1s ease,
+            filter 0.5s ease;
+}
+
+/* AU SURVOL : BACKFLIP 360° + SURBOOST DE COULEURS */
+#FAUJANET_MARTINS img:hover {
+    transform: rotateX(360deg) scale(1.15);
+    filter: brightness(1.4) saturate(1.6);
+}
+
+/* --- ANIMATIONS --- */
+
+/* Apparition progressive */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.85);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Bordure arc-en-ciel changeante */
+@keyframes neonBorder {
+    0% {
+        border-image-source: linear-gradient(45deg, #ff00ff, #00ffff, #ffff00, #ff6600, #00ff00, #ff00ff);
+    }
+    25% {
+        border-image-source: linear-gradient(45deg, #00ffff, #ffff00, #ff6600, #00ff00, #ff00ff, #00ffff);
+    }
+    50% {
+        border-image-source: linear-gradient(45deg, #ffff00, #ff6600, #00ff00, #ff00ff, #00ffff, #ffff00);
+    }
+    75% {
+        border-image-source: linear-gradient(45deg, #ff6600, #00ff00, #ff00ff, #00ffff, #ffff00, #ff6600);
+    }
+    100% {
+        border-image-source: linear-gradient(45deg, #ff00ff, #00ffff, #ffff00, #ff6600, #00ff00, #ff00ff);
+    }
+}
+
+/* Pulsation lumineuse */
+@keyframes pulse {
+    0% { box-shadow: 0 0 12px rgba(255, 0, 255, 0.6); }
+    50% { box-shadow: 0 0 28px rgba(0, 255, 255, 0.7); }
+    100% { box-shadow: 0 0 12px rgba(255, 0, 255, 0.6); }
+}
+
+/* Flottement vertical */
+@keyframes floating {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0); }
 }
